@@ -95,8 +95,17 @@ class M_Audit extends CI_Model {
 			if ($Fetch !== $this->Code_UNAUTHORIZED) {
 				return $Fetch;
 			}
-		}
-		else {
+		} if ($key === "getDataByDokumen") {
+			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
+			$parsedBody['idDokumen'] = $value_pk;
+			$Fetch = $this->guzzle->API_Get('F_RefAudit/getDataByDokumen', $parsedBody);
+			if ($Fetch == $this->Code_UNAUTHORIZED) {
+				return $this->Code_UNAUTHORIZED;
+			}
+			if ($Fetch !== $this->Code_UNAUTHORIZED) {
+				return $Fetch->data;
+			}
+		} else {
 			self::getRefAudit("getAll");
 		}
 	}

@@ -50,7 +50,7 @@
                             <th style="text-align: center;font-size: 13px" width="20px">No</th>
                             <th style="text-align: center;font-size: 13px" width="80px">Action</th>
                             <th style="text-align: center;font-size: 13px" >Departemen</th>
-                            <th style="text-align: center;font-size: 13px" width="150px">Case Number</th>
+                            <!-- <th style="text-align: center;font-size: 13px" width="150px">Case Number</th> -->
                             <th style="text-align: center;font-size: 13px" width="200px">Nomor Dokumen</th>
                             <th style="text-align: center;font-size: 13px" width="200px">Instansi</th>
                             <th style="text-align: center;font-size: 13px" width="200px">Judul Dokumen</th>
@@ -115,7 +115,7 @@
                                     </div>
                                 </td>
                                 <td><?= $data->namaDepartemen; ?></td>
-                                <td><?= $data->casenumberDokumen; ?></td>
+                                <!-- <td><?//= $data->casenumberDokumen; ?></td> -->
                                 <td><?= $data->nomorDokumen; ?></td>
                                 <td><?= $data->namaInstansi; ?></td>
                                 <td><?= $data->judulDokumen; ?></td>

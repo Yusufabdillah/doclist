@@ -176,6 +176,13 @@ class M_Dokumen extends CI_Model {
                 $this->guzzle->API_Put('F_Dokumen/put/', $data);
 				$idDokumen = $DATA_POST[$this->PK];
 
+				if (isset($DATA_POST['idAudit'])) {
+					self::resetRefAudit($DATA_POST[$this->PK]);
+					self::insertRefAudit($DATA_POST['idAudit'], $DATA_POST[$this->PK]);
+				} else if (!isset($DATA_POST['idAudit'])) {
+					self::resetRefAudit($DATA_POST[$this->PK]);
+				}
+
                 $RETURN_VALUE = array(
                     "STATUS" => "Update",
                     "PESAN" => "Dokumen ".$DATA_POST['judulDokumen']." berhasil dirubah"
@@ -209,6 +216,11 @@ class M_Dokumen extends CI_Model {
                 $Post = $this->guzzle->API_Post('F_Dokumen/post/', $data);
                 $idDokumen = $Post->idDokumen;
 
+
+				if (isset($DATA_POST['idAudit'])) {
+					self::insertRefAudit($DATA_POST['idAudit'], $DATA_POST[$this->PK]);
+				}
+
                 $RETURN_VALUE = array(
                     "STATUS" => "Create",
                     "PESAN" => "Dokumen ".$DATA_POST['judulDokumen']." berhasil dibuat",
@@ -234,6 +246,35 @@ class M_Dokumen extends CI_Model {
            return $RETURN_VALUE;
         }
     }
+
+    private function resetRefAudit($idDokumen) {
+		$dataParsed['idDokumen'] = $idDokumen;
+		$this->guzzle->API_Delete('F_RefAudit/deleteByDokumen/', $dataParsed);
+	}
+
+	private function insertRefAudit($idAudit, $idDokumen) {
+		$hitungData = count($idAudit);
+		if (!empty($hitungData)) {
+			if ($hitungData == 1) {
+				$dataParsed = array(
+					'idDokumen' => $idDokumen,
+					'idAudit' => $idAudit[0]
+				);
+				$this->guzzle->API_Post('F_RefAudit/post/', $dataParsed);
+			} else if ($hitungData > 1) {
+				foreach ($idAudit as $KEY => $data) {
+					$DATA_POST[] = array(
+						'idDokumen' => $idDokumen,
+						'idAudit' => $data
+					);
+				}
+				$dataParsed = array(
+					'data' => $DATA_POST
+				);
+				$this->guzzle->API_Post('F_RefAudit/postMultiple/', $dataParsed);
+			}
+		}
+	}
 
     /*
      * Fungsi   :   deleteDokumen

@@ -20,7 +20,8 @@ class F_Dokumen extends MY_Controller {
         $this->load->model(array(
             'M_Dokumen',
             'M_Departemen',
-            'M_Instansi'
+            'M_Instansi',
+            'M_Audit'
         ));
     }
 
@@ -51,11 +52,20 @@ class F_Dokumen extends MY_Controller {
         if (empty($idDokumen)) {
             $data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
             $data['get_instansi'] = $this->M_Instansi->getInstansi("getAll", null, null, null, false);
+            $data['get_audit'] = $this->M_Audit->getAudit('getAll', null, null, null, false);
             $this->template->frontend($this->VIEW_PATH."/form", "Tambah Dokumen", $data);
         } else if (!empty($idDokumen)) {
-			$data['get_dokumen'] = $this->M_Dokumen->getDokumen('getDataByPK', null, null, decode_str($idDokumen));
-			$data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
-			$data['get_instansi'] = $this->M_Instansi->getInstansi("getAll", null, null, null, false);
+			$refAudit = $this->M_Audit->getRefAudit('getDataByDokumen', null, null, decode_str($idDokumen));
+			foreach ($refAudit as $KEY => $data) {
+				$dataRefAudit[$KEY+1] = $data->idRef_audit;
+			}
+        	$data = array(
+        		'get_dokumen' => $this->M_Dokumen->getDokumen('getDataByPK', null, null, decode_str($idDokumen)),
+				'get_departemen' => $this->M_Departemen->getDepartemen("getAll", null, null, null, false),
+				'get_instansi' => $this->M_Instansi->getInstansi("getAll", null, null, null, false),
+				'get_audit' => $this->M_Audit->getAudit('getAll', null, null, null, false),
+				'get_ref_audit' => isset($dataRefAudit) ? $dataRefAudit : null
+			);
 			$this->template->frontend($this->VIEW_PATH."/form", "Edit Dokumen", $data);
         }
     }

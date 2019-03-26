@@ -9,4 +9,5 @@
 <script type="text/javascript">
     $('.idDepartemen').select2({allowClear: true});
     $('.idInstansi').select2({allowClear: true});
+    $('#idAudit').select2();
 </script>
