@@ -8,9 +8,9 @@
 ?>
 <script type="text/javascript">
     $(document).on("click", ".modalDelete", function () {
-        var d_idAkses = $(this).data('d_id');
-        var d_namaAkses = $(this).data('d_nama');
-        $(".modal-body #d_idAkses").val(d_idAkses);
-        $(".modal-body #d_namaAkses").val(d_namaAkses);
+        var d_idAudit = $(this).data('d_id');
+        var d_namaAudit = $(this).data('d_nama');
+        $(".modal-body #d_idAudit").val(d_idAudit);
+        $(".modal-body #d_namaAudit").val(d_namaAudit);
     });
 </script>

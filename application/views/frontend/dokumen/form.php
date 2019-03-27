@@ -543,8 +543,8 @@
 														<?php
 														if (isset($get_dokumen)) {
 															if (!empty($get_ref_audit)) {
-																$Selected = array_search($data->idAudit, $get_ref_audit);
-																if (!empty($Selected)) {
+																$Selected_Audit = array_search($data->idAudit, $get_ref_audit);
+																if (!empty($Selected_Audit)) {
 																	echo "selected";
 																}
 															}
@@ -557,6 +557,52 @@
 											</select>
 											<span class="help-block">
 												<?= $refAudit['help']; ?>
+												<a href="javascript:;" onclick="helpInstansi()"><i class="fa fa-question-circle-o " style="padding-left: 10px;font-size: 20px"></i></a>
+                                			</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<?php
+										$refKeyword = array(
+											'label' => 'Keyword',
+											'name' => 'idKeyword[]',
+											'id' => 'idKeyword',
+											'placeholder' => 'Pilih Keyword',
+											'help' => 'Mohon pilih keyword'
+										);
+										?>
+										<div class="col-md-12">
+											<label class="control-label"><?= $refKeyword['label']; ?></label><br>
+											<select multiple id="<?= $refKeyword['id']; ?>" name="<?= $refKeyword['name']; ?>"
+													class="<?= $refKeyword['name']; ?>"
+													data-placeholder="<?= $refKeyword['placeholder']; ?>"
+													style="width: 100%;">
+												<option></option>
+												<?php
+												foreach ($get_keyword as $data) {
+													?>
+													<option
+														<?php
+														if (isset($get_dokumen)) {
+															if (!empty($get_ref_keyword)) {
+																$Selected_Keyword = array_search($data->idKeyword, $get_ref_keyword);
+																if (!empty($Selected_Keyword)) {
+																	echo "selected";
+																}
+															}
+														}
+														?>
+														value="<?= $data->idKeyword; ?>"><?= $data->namaKeyword; ?></option>
+													<?php
+												}
+												?>
+											</select>
+											<span class="help-block">
+												<?= $refKeyword['help']; ?>
 												<a href="javascript:;" onclick="helpInstansi()"><i class="fa fa-question-circle-o " style="padding-left: 10px;font-size: 20px"></i></a>
                                 			</span>
 										</div>

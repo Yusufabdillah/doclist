@@ -176,11 +176,18 @@ class M_Dokumen extends CI_Model {
                 $this->guzzle->API_Put('F_Dokumen/put/', $data);
 				$idDokumen = $DATA_POST[$this->PK];
 
-				if (isset($DATA_POST['idAudit'])) {
+				if (!empty($DATA_POST['idAudit'])) {
 					self::resetRefAudit($DATA_POST[$this->PK]);
 					self::insertRefAudit($DATA_POST['idAudit'], $DATA_POST[$this->PK]);
-				} else if (!isset($DATA_POST['idAudit'])) {
+				} else if (empty($DATA_POST['idAudit'])) {
 					self::resetRefAudit($DATA_POST[$this->PK]);
+				}
+
+				if (!empty($DATA_POST['idKeyword'])) {
+					self::resetRefKeyword($DATA_POST[$this->PK]);
+					self::insertRefKeyword($DATA_POST['idKeyword'], $DATA_POST[$this->PK]);
+				} else if (empty($DATA_POST['idKeyword'])) {
+					self::resetRefKeyword($DATA_POST[$this->PK]);
 				}
 
                 $RETURN_VALUE = array(
@@ -217,8 +224,12 @@ class M_Dokumen extends CI_Model {
                 $idDokumen = $Post->idDokumen;
 
 
-				if (isset($DATA_POST['idAudit'])) {
+				if (!empty($DATA_POST['idAudit'])) {
 					self::insertRefAudit($DATA_POST['idAudit'], $DATA_POST[$this->PK]);
+				}
+
+				if (!empty($DATA_POST['idKeyword'])) {
+					self::insertRefKeyword($DATA_POST['idKeyword'], $DATA_POST[$this->PK]);
 				}
 
                 $RETURN_VALUE = array(
@@ -258,20 +269,53 @@ class M_Dokumen extends CI_Model {
 			if ($hitungData == 1) {
 				$dataParsed = array(
 					'idDokumen' => $idDokumen,
-					'idAudit' => $idAudit[0]
+					'idAudit' => $idAudit[0],
+					'createdBy' => $this->session->idUser
 				);
 				$this->guzzle->API_Post('F_RefAudit/post/', $dataParsed);
 			} else if ($hitungData > 1) {
 				foreach ($idAudit as $KEY => $data) {
 					$DATA_POST[] = array(
 						'idDokumen' => $idDokumen,
-						'idAudit' => $data
+						'idAudit' => $data,
+						'createdBy' => $this->session->idUser
 					);
 				}
 				$dataParsed = array(
 					'data' => $DATA_POST
 				);
 				$this->guzzle->API_Post('F_RefAudit/postMultiple/', $dataParsed);
+			}
+		}
+	}
+
+	private function resetRefKeyword($idDokumen) {
+		$dataParsed['idDokumen'] = $idDokumen;
+		$this->guzzle->API_Delete('B_Keyword/deleteByDokumenRef/', $dataParsed);
+	}
+
+	private function insertRefKeyword($idKeyword, $idDokumen) {
+		$hitungData = count($idKeyword);
+		if (!empty($hitungData)) {
+			if ($hitungData == 1) {
+				$dataParsed = array(
+					'idDokumen' => $idDokumen,
+					'idKeyword' => $idKeyword[0],
+					'createdBy' => $this->session->idUser
+				);
+				$this->guzzle->API_Post('B_Keyword/postRef/', $dataParsed);
+			} else if ($hitungData > 1) {
+				foreach ($idKeyword as $KEY => $data) {
+					$DATA_POST[] = array(
+						'idDokumen' => $idDokumen,
+						'idKeyword' => $data,
+						'createdBy' => $this->session->idUser
+					);
+				}
+				$dataParsed = array(
+					'data' => $DATA_POST
+				);
+				$this->guzzle->API_Post('B_Keyword/postMultipleRef/', $dataParsed);
 			}
 		}
 	}
