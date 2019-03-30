@@ -106,7 +106,7 @@
 											}
 										}
 										?> -->
-										<a href="<?= site_url('F_Dokumen/detail/'.encode_str($data->idDokumen)); ?>" title="Lihat Dokumen" class="btn btn-md btn-info"><i class="fa fa-book"></i></a>
+										<a href="<?= site_url('F_MonitoringDokumen/detail/'.encode_str($data->idDokumen)); ?>" title="Lihat Dokumen" class="btn btn-md btn-info"><i class="fa fa-book"></i></a>
                                         <!-- <a
                                                 data-h_id="<?//= $data->idDokumen; ?>"
                                                 data-h_jdl="<?//= $data->judulDokumen; ?>"

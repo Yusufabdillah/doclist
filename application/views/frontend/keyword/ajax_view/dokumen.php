@@ -42,3 +42,7 @@
 	?>
 	</tbody>
 </table>
+<?php
+if (!empty($get_dokumen)) {
+	$this->load->view('frontend/keyword/JSDatatable');
+}

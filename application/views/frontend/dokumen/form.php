@@ -42,37 +42,74 @@
 								<input type="hidden" name="idDokumen" value="<?= $get_dokumen->idDokumen; ?>">
 								<input type="hidden" name="createdBy" value="<?= $get_dokumen->createdBy; ?>">
 								<input type="hidden" name="createdDate" value="<?= $get_dokumen->createdDate; ?>">
+								<input type="hidden" name="idDepartemen" value="<?= $get_dokumen->idDepartemen; ?>">
+								<?php
+							} else if (!isset($get_dokumen)) {
+								?>
+								<input type="hidden" name="idDepartemen"
+									   value="<?= isset($_SESSION) ? $_SESSION['idDepartemen'] : null; ?>" required>
 								<?php
 							}
 							?>
-							<input type="hidden" name="idDepartemen"
-								   value="<?= isset($_SESSION) ? $_SESSION['idDepartemen'] : null; ?>" required>
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
-										<?php
-										$departemen = array(
-											'label' => 'Departemen',
-											'name' => 'namaDepartemen',
-											'placeholder' => 'Pilih departemen',
-											'help' => 'Departemen otomatis terpilih sesuai sesi yang aktif'
-										);
-										?>
-										<div class="col-md-12">
-											<label class="control-label"><?= $departemen['label']; ?></label><br>
-											<input type="text" name="<?= $departemen['name']; ?>"
-												   class="form-control input-sm"
-												   readonly
-												   placeholder="<?= $departemen['placeholder']; ?>"
-												   value="<?= isset($_SESSION) ? $_SESSION['namaDepartemen'] : null; ?>"/>
-											<span class="help-block">
+									<?php
+									if (isset($get_dokumen)) {
+									?>
+										<div class="form-group">
+											<?php
+											$departemen = array(
+												'label' => 'Departemen',
+												'name' => 'namaDepartemen',
+												'placeholder' => 'Pilih departemen',
+												'help' => 'Departemen otomatis terpilih sesuai sesi yang aktif'
+											);
+											?>
+											<div class="col-md-12">
+												<label class="control-label"><?= $departemen['label']; ?></label><br>
+												<input type="text" name="<?= $departemen['name']; ?>"
+													   class="form-control input-sm"
+													   readonly
+													   placeholder="<?= $departemen['placeholder']; ?>"
+													   value="<?= isset($get_dokumen) ? $get_dokumen->namaDepartemen : null; ?>"/>
+												<span class="help-block">
                                     <?= $departemen['help']; ?>
                                     <a href="javascript:;" onclick="helpDepartemen()"><i
 											class="fa fa-question-circle-o "
 											style="padding-left: 10px;font-size: 20px"></i></a>
                                 </span>
+											</div>
 										</div>
-									</div>
+										<?php
+									} else if (!isset($get_dokumen)) {
+									?>
+										<div class="form-group">
+											<?php
+											$departemen = array(
+												'label' => 'Departemen',
+												'name' => 'namaDepartemen',
+												'placeholder' => 'Pilih departemen',
+												'help' => 'Departemen otomatis terpilih sesuai sesi yang aktif'
+											);
+											?>
+											<div class="col-md-12">
+												<label class="control-label"><?= $departemen['label']; ?></label><br>
+												<input type="text" name="<?= $departemen['name']; ?>"
+													   class="form-control input-sm"
+													   readonly
+													   placeholder="<?= $departemen['placeholder']; ?>"
+													   value="<?= isset($_SESSION) ? $_SESSION['namaDepartemen'] : null; ?>"/>
+												<span class="help-block">
+                                    <?= $departemen['help']; ?>
+                                    <a href="javascript:;" onclick="helpDepartemen()"><i
+											class="fa fa-question-circle-o "
+											style="padding-left: 10px;font-size: 20px"></i></a>
+                                </span>
+											</div>
+										</div>
+										<?php
+									}
+									?>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">

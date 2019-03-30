@@ -35,6 +35,11 @@ class F_Keyword extends MY_Controller {
 		$this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
 	}
 
+	public function detail($idDokumen) {
+		$data['get_dokumen'] = $this->M_Dokumen->getDokumen('getDataByPK', null, null, decode_str($idDokumen));
+		$this->template->frontend($this->VIEW_PATH."/detail", "Detail Dokumen", $data);
+	}
+
 	public function AJAX() {
 		$Fungsi = $this->input->post('fungsi');
 		if ($Fungsi == 'toKeyword') {
