@@ -48,7 +48,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center;font-size: 13px" width="20px">No</th>
-                            <th style="text-align: center;font-size: 13px" width="80px">Action</th>
+                            <th style="text-align: center;font-size: 13px" width="150px">Action</th>
                             <th style="text-align: center;font-size: 13px" >Departemen</th>
                             <!-- <th style="text-align: center;font-size: 13px" width="150px">Case Number</th> -->
                             <th style="text-align: center;font-size: 13px" width="200px">Nomor Dokumen</th>
@@ -68,51 +68,66 @@
                             <tr>
                                 <td style="text-align: center"><?= $KEY+1; ?></td>
                                 <td style="text-align: center">
-                                    <div class="btn-group">
+									<?php
+									if ($data->status_mutasi == true) {
+										?>
+										<i class="fa fa-info-circle"></i> Menunggu verifikasi mutasi
 										<?php
-										if ($_SESSION['idAkses'] == 3 OR $_SESSION['idAkses'] == 1) {
-											?>
-											<a href="<?= site_url('F_Dokumen/form/'.encode_str($data->idDokumen)); ?>" class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
+									} else if ($data->status_mutasi == false) {
+										?>
+										<div class="btn-group">
 											<?php
-										} else {
-											if ($data->se_ajuan_statusDokumen == 1) {
+											if ($_SESSION['idAkses'] == 3 OR $_SESSION['idAkses'] == 1) {
 												?>
-												<button class="btn btn-md btn-default" data-toggle="tooltip" title="Pengajuan pengubahan menunggu verifikasi koordinator, diajukan oleh <?= $data->se_ajuan_olehDokumen; ?>" type="button" ><i class="fa fa-pencil text-danger"></i></button>
+												<a title="Edit Dokumen"  href="<?= site_url('F_Dokumen/form/'.encode_str($data->idDokumen)); ?>" class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
+												<a
+													data-mt_id_dok="<?= $data->idDokumen; ?>"
+													data-mt_id_dep="<?= $data->idDepartemen; ?>"
+													data-mt_jdl_dok="<?= $data->judulDokumen; ?>"
+													title="Mutasi Dokumen" data-toggle="modal" href="#modalMutasi" class="modalMutasi btn btn-md btn-warning"><i class="fa fa-exchange"></i></a>
 												<?php
-											} else if ($data->se_ajuan_statusDokumen == 0) {
-												if ($data->status_editDokumen == 1) {
+											} else {
+												if ($data->se_ajuan_statusDokumen == 1) {
 													?>
-													<a href="<?= site_url('F_Dokumen/form/'.encode_str($data->idDokumen)); ?>" class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
+													<button class="btn btn-md btn-default" data-toggle="tooltip" title="Pengajuan pengubahan menunggu verifikasi koordinator, diajukan oleh <?= $data->se_ajuan_olehDokumen; ?>" type="button" ><i class="fa fa-pencil text-danger"></i></button>
 													<?php
-												} else if ($data->status_editDokumen == 0) {
-													?>
-													<a
-														data-pe_id="<?= $data->idDokumen; ?>"
-														data-pe_jdl="<?= $data->judulDokumen; ?>"
-														data-pe_no="<?= $data->nomorDokumen; ?>"
-
-														href="#modalPengajuanEdit" data-toggle="modal" title="Pengajuan Edit" class="modalPengajuanEdit btn btn-md btn-default"><i class="fa fa-pencil"></i></a>
-													<?php
-													if (!empty($data->ktr_tolak_editDokumen)) {
+												} else if ($data->se_ajuan_statusDokumen == 0) {
+													if ($data->status_editDokumen == 1) {
+														?>
+														<a href="<?= site_url('F_Dokumen/form/'.encode_str($data->idDokumen)); ?>" class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
+														<?php
+													} else if ($data->status_editDokumen == 0) {
 														?>
 														<a
-															data-kt_jdl="<?= $data->judulDokumen; ?>"
-															data-kt_ktr="<?= $data->ktr_tolak_editDokumen; ?>"
+															data-pe_id="<?= $data->idDokumen; ?>"
+															data-pe_jdl="<?= $data->judulDokumen; ?>"
+															data-pe_no="<?= $data->nomorDokumen; ?>"
 
-															href="#modalKeteranganDecline" data-toggle="modal" title="Keterangan Penolakan" class="modalKeteranganDecline btn btn-md btn-danger"><i class="fa fa-book"></i></a>
+															href="#modalPengajuanEdit" data-toggle="modal" title="Pengajuan Edit" class="modalPengajuanEdit btn btn-md btn-default"><i class="fa fa-pencil"></i></a>
 														<?php
+														if (!empty($data->ktr_tolak_editDokumen)) {
+															?>
+															<a
+																data-kt_jdl="<?= $data->judulDokumen; ?>"
+																data-kt_ktr="<?= $data->ktr_tolak_editDokumen; ?>"
+
+																href="#modalKeteranganDecline" data-toggle="modal" title="Keterangan Penolakan" class="modalKeteranganDecline btn btn-md btn-danger"><i class="fa fa-book"></i></a>
+															<?php
+														}
 													}
 												}
 											}
-										}
-										?>
-										<a href="<?= site_url('F_Dokumen/detail/'.encode_str($data->idDokumen)); ?>" title="Lihat Dokumen" class="btn btn-md btn-info"><i class="fa fa-book"></i></a>
-                                        <!-- <a
+											?>
+											<a href="<?= site_url('F_Dokumen/detail/'.encode_str($data->idDokumen)); ?>" title="Lihat Dokumen" class="btn btn-md btn-info"><i class="fa fa-book"></i></a>
+											<!-- <a
                                                 data-h_id="<?//= $data->idDokumen; ?>"
                                                 data-h_jdl="<?//= $data->judulDokumen; ?>"
 
                                                 href="#modalDelete" data-toggle="modal" class="modalDelete btn btn-xs btn-danger"><i class="fa fa-trash"></i></a> -->
-                                    </div>
+										</div>
+										<?php
+									}
+									?>
                                 </td>
                                 <td><?= $data->namaDepartemen; ?></td>
                                 <!-- <td><?//= $data->casenumberDokumen; ?></td> -->
@@ -144,3 +159,4 @@ $this->load->view('frontend/dokumen/modalDelete');
 $this->load->view('frontend/dokumen/modalPengajuanEdit');
 $this->load->view('frontend/dokumen/modalKeteranganDecline');
 $this->load->view('frontend/dokumen/JSNotify');
+$this->load->view('frontend/dokumen/modalMutasi', $get_departemen);

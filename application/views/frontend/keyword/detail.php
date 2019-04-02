@@ -333,7 +333,7 @@
 						?>
 						<div class="tab-pane" id="pdf">
 							<embed width="100%" height="1000px"
-									src="<?= site_url('assets/data_uploads/(' . $get_dokumen->idDepartemen . ')' . $get_dokumen->singkatanDepartemen . '/Dokumen/' . $get_dokumen->fileDokumen); ?>#toolbar=0&navpanes=0&scrollbar=0">
+									src="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>#toolbar=0&navpanes=0&scrollbar=0">
 						</div>
 						<?php
 					}

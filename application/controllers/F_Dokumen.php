@@ -22,7 +22,8 @@ class F_Dokumen extends MY_Controller {
             'M_Departemen',
             'M_Instansi',
             'M_Audit',
-			'M_Keyword'
+			'M_Keyword',
+			'M_User'
         ));
     }
 
@@ -33,6 +34,7 @@ class F_Dokumen extends MY_Controller {
      */
     public function index() {
         $data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
+		$data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
         if ($_SESSION['idAkses'] == 1) {
 			$data['get_dokumen'] = $this->M_Dokumen->getDokumen();
 		} else {
@@ -88,7 +90,7 @@ class F_Dokumen extends MY_Controller {
         if ($RETURN_MODEL) {
             if ($RETURN_MODEL["STATUS"] === 'Update') {
                 $this->session->set_flashdata("NOTIFY", $RETURN_MODEL["STATUS"]."/".$RETURN_MODEL['PESAN']);
-                redirect($this->router->fetch_class().'/index/');
+                redirect($this->router->fetch_class().'/index');
             } if ($RETURN_MODEL["STATUS"] === 'Create') {
                 $this->session->set_flashdata("NOTIFY", $RETURN_MODEL["STATUS"]."/".$RETURN_MODEL['PESAN']);
                 redirect($this->router->fetch_class().'/index');
@@ -120,6 +122,10 @@ class F_Dokumen extends MY_Controller {
 		if ($Fungsi == 'toReminder') {
 			$data['status'] = $this->input->post('status');
 			$this->load->view('frontend/dokumen/ajax_view/reminder', $data);
+		}
+		if ($Fungsi == 'toKoordinator') {
+			$data['get_user'] = $this->M_User->getUser('getDataByDepartemen', null, null, $_POST['idDepartemen']);
+			$this->load->view('frontend/dokumen/ajax_view/user', $data);
 		}
         /**
          * Untuk Kepala Instansi

@@ -14,6 +14,14 @@
         $(".modal-body #h_idDokumen").val(h_idDokumen);
         $(".modal-body #h_judulDokumen").val(h_judulDokumen);
     });
+	$(document).on("click", ".modalMutasi", function () {
+		var mt_idDokumen = $(this).data('mt_id_dok');
+		var mt_idDepartemen = $(this).data('mt_id_dep');
+		var mt_judulDokumen = $(this).data('mt_jdl_dok');
+		$(".modal-body #mt_idDokumen").val(mt_idDokumen);
+		$(".modal-body #mt_idDepartemen").val(mt_idDepartemen);
+		$(".modal-body #mt_judulDokumen").val(mt_judulDokumen);
+	});
 	$(document).on("click", ".modalKeteranganDecline", function () {
 		var kt_judulDokumen = $(this).data('kt_jdl');
 		var kt_ktr_tolak_editDokumen = $(this).data('kt_ktr');

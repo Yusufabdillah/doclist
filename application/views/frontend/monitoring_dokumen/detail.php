@@ -320,7 +320,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group form-actions text-center">
-									<a href="<?= site_url('F_Keyword/index'); ?>" class="btn btn-md btn-warning"><i
+									<a href="<?= site_url('F_MonitoringDokumen/index'); ?>" class="btn btn-md btn-warning"><i
 											class="fa fa-reply"></i> Kembali</a>
 								</div>
 							</div>
@@ -333,7 +333,7 @@
 						?>
 						<div class="tab-pane" id="pdf">
 							<embed width="100%" height="1000px"
-								   src="<?= site_url('assets/data_uploads/(' . $get_dokumen->idDepartemen . ')' . $get_dokumen->singkatanDepartemen . '/Dokumen/' . $get_dokumen->fileDokumen); ?>">
+								   src="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>">
 						</div>
 						<?php
 					}

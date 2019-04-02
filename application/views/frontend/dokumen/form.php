@@ -319,7 +319,7 @@
 														if (!empty($get_dokumen->fileDokumen)) {
 															?>
 															<span class="input-group-btn">
-																<a target="_blank" href="<?= site_url('assets/data_uploads/(' . $get_dokumen->idDepartemen . ')' . $get_dokumen->singkatanDepartemen . '/Dokumen/' . $get_dokumen->fileDokumen); ?>"
+																<a target="_blank" href="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>"
 																   class="btn btn-block btn-md btn-info"><i
 																		class="fa fa-download"></i> Download Dokumen</a>
 															</span>
@@ -667,7 +667,7 @@
 							?>
 							<div class="tab-pane" id="pdf">
 								<object width="100%" height="1000px"
-										data="<?= site_url('assets/data_uploads/(' . $get_dokumen->idDepartemen . ')' . $get_dokumen->singkatanDepartemen . '/Dokumen/' . $get_dokumen->fileDokumen); ?>"></object>
+										data="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>"></object>
 							</div>
 							<?php
 						}

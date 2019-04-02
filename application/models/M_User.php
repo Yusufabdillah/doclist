@@ -46,7 +46,16 @@ class M_User extends CI_Model {
             } if ($Fetch !== $this->Code_UNAUTHORIZED) {
                 return $Fetch;
             }
-        } if ($key === "getDataByPerusahaan") {
+        } if ($key === "getDataByDepartemen") {
+			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
+			$parsedBody['idDepartemen'] = $value_pk;
+			$Fetch = $this->guzzle->API_Get('B_User/getDataByDepartemen', $parsedBody);
+			if ($Fetch == $this->Code_UNAUTHORIZED) {
+				return $this->Code_UNAUTHORIZED;
+			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
+				return $Fetch;
+			}
+		} if ($key === "getDataByPerusahaan") {
             $parsedBody['idUser'] = encode_str($_SESSION['idUser']);
             $Fetch = $this->guzzle->API_Get('B_User/getData/'.$_SESSION['idPerusahaan'].'/idPerusahaan', $parsedBody);
             if ($Fetch == $this->Code_UNAUTHORIZED) {

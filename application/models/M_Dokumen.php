@@ -109,8 +109,8 @@ class M_Dokumen extends CI_Model {
 			/*
              * Proses Upload Codeigniter =======================================
              */
-			$config['file_name'] = 'Dokumen(' . caseNumber($_SESSION['singkatanDepartemen'], '01') . ')(' . rand(0, 10000) . ')';
-			$config['upload_path'] = "assets/data_uploads/(" . $_SESSION['idDepartemen'] . ")" . $_SESSION['singkatanDepartemen'] . "/Dokumen";
+			$config['file_name'] = 'Dokumen(' . $_SESSION['singkatanDepartemen'] . ')(' . rand(0, 10000) . ')';
+			$config['upload_path'] = "assets/data_uploads/RSUP/Dokumen";
 			$config['allowed_types'] = 'gif|jpg|png|pdf|doc|csv';
 			$config['max_size'] = 100000;
 			//$config['max_width']            = 1024;
