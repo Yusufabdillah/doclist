@@ -56,6 +56,15 @@ class M_Dokumen extends CI_Model {
 			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
 				return $Fetch;
 			}
+		} if ($key === "cekCaseNumber") {
+			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
+			$parsedBody['casenumberDokumen'] = $value_pk;
+			$Fetch = $this->guzzle->API_Get('F_Dokumen/cekCaseNumber', $parsedBody);
+			if ($Fetch == $this->Code_UNAUTHORIZED) {
+				return $this->Code_UNAUTHORIZED;
+			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
+				return $Fetch;
+			}
 		}
         else {
             self::getDokumen("getAll");
@@ -154,7 +163,6 @@ class M_Dokumen extends CI_Model {
 					'rentang_hari_berlakuDokumen' => isset($DATA_POST['rentang_hari_berlakuDokumen']) ? $DATA_POST['rentang_hari_berlakuDokumen'] : null,
                     'awalReminder' => $DATA_POST['mulaiReminder'],
                     'durasiReminder' => $DATA_POST['durasiReminder'],
-					// 'casenumberDokumen' => caseNumber($_SESSION['singkatanDepartemen'], '01'),
 					'kpl_insDokumen' => $DATA_POST['kpl_insDokumen'],
 					'jbt_kpl_insDokumen' => $DATA_POST['jbt_kpl_insDokumen'],
 					'fileDokumen' => $file,
@@ -210,7 +218,7 @@ class M_Dokumen extends CI_Model {
                     'tgl_terbitDokumen' => isset($DATA_POST['tgl_terbitDokumen']) ? formatTanggal('/',$DATA_POST['tgl_terbitDokumen']) : null,
                     'tgl_habisDokumen' => isset($DATA_POST['tgl_habisDokumen']) ? formatTanggal("/",$DATA_POST['tgl_habisDokumen']) : null,
                     'rentang_hari_berlakuDokumen' => isset($DATA_POST['rentang_hari_berlakuDokumen']) ? $DATA_POST['rentang_hari_berlakuDokumen'] : null,
-                    'casenumberDokumen' => caseNumber($_SESSION['singkatanDepartemen'], '01'),
+                    'casenumberDokumen' => $this->casenumber->create($_SESSION['singkatanDepartemen'], '01'),
                     'kpl_insDokumen' => $DATA_POST['kpl_insDokumen'],
                     'jbt_kpl_insDokumen' => $DATA_POST['jbt_kpl_insDokumen'],
                     'fileDokumen' => $file,
