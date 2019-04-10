@@ -12,11 +12,19 @@
             <i class="fa fa-bars fa-fw"></i>
         </a>
     </li>
+	<li>
+		<a href="<?= site_url($this->router->fetch_class()."/index"); ?>" style="font-size: 20px">
+			<?php
+			$EXPL = explode('_', $this->router->fetch_class());
+			echo $EXPL[1];
+			?> &nbsp;/&nbsp; <?= $this->router->fetch_method(); ?>
+		</a>
+	</li>
 </ul>
 <ul class="nav navbar-nav-custom pull-right">
     <li class="dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-comments"></i>
+            <i class="fa fa-bell"></i>
         </a>
         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
             <li class="dropdown-header text-center">Notifikasi</li>

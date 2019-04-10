@@ -35,11 +35,6 @@ class F_Dokumen extends MY_Controller {
     public function index() {
         $data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
 		$data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
-        if ($_SESSION['idAkses'] == 1) {
-			$data['get_dokumen'] = $this->M_Dokumen->getDokumen();
-		} else {
-			$data['get_dokumen'] = $this->M_Dokumen->getDokumen('getDataByDepartemen');
-		}
         $this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
     }
    
@@ -113,28 +108,43 @@ class F_Dokumen extends MY_Controller {
 		redirect($this->router->fetch_class().'/index');
 	}
 
-    public function AJAX() {
-        $Fungsi = $this->input->post('fungsi');
-        if ($Fungsi == 'toMasaBerlaku') {
-            $data['status'] = $this->input->post('status');
-            $this->load->view('frontend/dokumen/ajax_view/tgl_berlaku', $data);
-        }
-		if ($Fungsi == 'toReminder') {
-			$data['status'] = $this->input->post('status');
-			$this->load->view('frontend/dokumen/ajax_view/reminder', $data);
+    public function AJAX($fetch = null, $parsingValue = null) {
+		if (isset($fetch)) {
+			if ($fetch == 'getDokumen-getByAkses') {
+				if (decode_str($parsingValue) == 1) {
+					print $this->M_Dokumen->getDokumen('getAll', null, null, null, true);
+				} else {
+					print $this->M_Dokumen->getDokumen('getDataByDepartemen', null, null, null, true);
+				}
+			}
+		} else if (!isset($fetch)) {
+			$Fungsi = $this->input->post('fungsi');
+			if ($Fungsi == 'toForm') {
+				print encode_str($this->input->post('idDokumen'));
+			}
+			if ($Fungsi == 'toDetail') {
+				print encode_str($this->input->post('idDokumen'));
+			}
+			if ($Fungsi == 'toMasaBerlaku') {
+				$data['status'] = $this->input->post('status');
+				$this->load->view('frontend/dokumen/ajax_view/tgl_berlaku', $data);
+			}
+			if ($Fungsi == 'toReminder') {
+				$data['status'] = $this->input->post('status');
+				$this->load->view('frontend/dokumen/ajax_view/reminder', $data);
+			}
+			if ($Fungsi == 'toKoordinator') {
+				$data['get_user'] = $this->M_User->getUser('getDataByDepartemen', null, null, $_POST['idDepartemen']);
+				$this->load->view('frontend/dokumen/ajax_view/user', $data);
+			}
+			/**
+			 * Untuk Kepala Instansi
+			 */
+			if ($Fungsi == 'toKepalaInstansi') {
+				$data['get_instansi'] = $this->M_Instansi->getInstansi('getDataByPK', null, null, $_POST['idInstansi']);
+				$this->load->view('frontend/dokumen/ajax_view/kepala_instansi',$data);
+			}
 		}
-		if ($Fungsi == 'toKoordinator') {
-			$data['get_user'] = $this->M_User->getUser('getDataByDepartemen', null, null, $_POST['idDepartemen']);
-			$this->load->view('frontend/dokumen/ajax_view/user', $data);
-		}
-        /**
-         * Untuk Kepala Instansi
-         */
-        if ($Fungsi == 'toKepalaInstansi') {
-            $data['get_instansi'] = $this->M_Instansi->getInstansi('getDataByPK', null, null, $_POST['idInstansi']);
-            $this->load->view('frontend/dokumen/ajax_view/kepala_instansi',$data);
-        }
-
     }
 
 }

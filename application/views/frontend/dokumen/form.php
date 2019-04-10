@@ -6,18 +6,16 @@
  * Time: 14:56
  */
 ?>
-	<div class="content-header">
-		<div class="header-section">
-			<h1>
-				<i class="fa fa-file-o"></i> Dokumen
-			</h1>
-		</div>
-	</div>
-<?php $this->load->view('tmp_frontend/breadcrumb') ?>
 	<div class="row animation-fadeInQuick">
 		<div class="col-md-12">
 			<div class="block full">
 				<div class="block-title">
+					<div class="block-options pull-right">
+						<a href="<?= site_url('F_Dokumen/index'); ?>" class="btn btn-alt btn-sm btn-warning">
+							<i class="fa fa-reply"></i> Kembali
+						</a>
+					</div>
+					<h2><strong><i class="fa fa-pencil"></i> Form Dokumen</strong></h2>
 					<ul class="nav nav-tabs" data-toggle="tabs">
 						<li class="active"><a href="#form">Form</a></li>
 						<?php
@@ -649,9 +647,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-md-12">
-									<div class="form-group form-actions text-center">
-										<a href="<?= site_url('F_Dokumen/index'); ?>" class="btn btn-md btn-warning"><i
-												class="fa fa-reply"></i> Kembali</a>
+									<div class="form-group form-actions text-right" style="margin-right: 2%">
 										<button type="button" data-toggle="modal" data-target="#modalSubmit"
 												class="btn btn-md btn-success"><i class="fa fa-arrow-right"></i> Submit
 										</button>
@@ -682,6 +678,5 @@ $this->load->view('frontend/dokumen/JSSelect2');
 $this->load->view('frontend/dokumen/JSCKEditor');
 $this->load->view('frontend/dokumen/AJAX');
 $this->load->view('frontend/dokumen/JSValidasi');
-$this->load->view('frontend/dokumen/JSNotify');
 $this->load->view('frontend/dokumen/JSDatepicker');
 

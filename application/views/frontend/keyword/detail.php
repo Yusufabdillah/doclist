@@ -6,18 +6,16 @@
  * Time: 14:56
  */
 ?>
-<div class="content-header">
-	<div class="header-section">
-		<h1>
-			<i class="fa fa-file-o"></i> Detail Dokumen
-		</h1>
-	</div>
-</div>
-<?php $this->load->view('tmp_frontend/breadcrumb') ?>
 <div class="row animation-fadeInQuick">
 	<div class="col-md-12">
 		<div class="block full">
 			<div class="block-title">
+				<div class="block-options pull-right">
+					<button type="button" onclick="window.history.go(-1); return false;" class="btn btn-alt btn-sm btn-warning">
+						<i class="fa fa-reply"></i> Kembali
+					</button>
+				</div>
+				<h2><strong><i class="fa fa-book"></i> Detail Dokumen</strong></h2>
 				<ul class="nav nav-tabs" data-toggle="tabs">
 					<li class="active"><a href="#detail">Detail</a></li>
 					<?php
@@ -314,16 +312,6 @@
 									</div>
 								</div>
 							</div>
-
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group form-actions text-center">
-									<a href="<?= site_url('F_Keyword/index'); ?>" class="btn btn-md btn-warning"><i
-											class="fa fa-reply"></i> Kembali</a>
-								</div>
-							</div>
 						</div>
 					</form>
 				</div>
@@ -333,7 +321,7 @@
 						?>
 						<div class="tab-pane" id="pdf">
 							<embed width="100%" height="1000px"
-									src="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>#toolbar=0&navpanes=0&scrollbar=0">
+								   src="<?= site_url('assets/data_uploads/RSUP/Dokumen/' . $get_dokumen->fileDokumen); ?>#toolbar=0&navpanes=0&scrollbar=0">
 						</div>
 						<?php
 					}

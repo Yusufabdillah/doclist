@@ -34,8 +34,8 @@
 					</div>
 					<hr>
 					<div class="container-fluid">
-						<div class="row">
-							<h1>Anda yakin ?</h1>
+						<div class="row text-center">
+							<h1>Anda yakin untuk menghapus dokumen dari audit ini ?</h1>
 						</div>
 					</div>
 				</div>

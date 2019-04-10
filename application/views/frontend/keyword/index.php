@@ -6,19 +6,11 @@
  * Time: 22:16
  */
 ?>
-	<div class="content-header">
-		<div class="header-section">
-			<h1>
-				<i class="fa fa-search"></i> Pencarian Berdasarkan Keyword
-			</h1>
-		</div>
-	</div>
-<?php $this->load->view('tmp_frontend/breadcrumb') ?>
 	<div class="row animation-fadeInQuick">
 		<div class="col-md-12">
 			<div class="block full table-responsive">
 				<div class="block-title">
-					<h2><strong>Tabel</strong> Dokumen</h2>
+					<h2><strong><i class="fa fa-search"></i> Pencarian</strong> Berdasarkan Keyword</h2>
 				</div>
 				<form class="form-horizontal">
 					<div class="row">
@@ -57,37 +49,17 @@
 						</div>
 					</div>
 				</form>
-			</div>
-		</div>
-	</div>
-	<div class="row animation-fadeInQuick">
-		<div class="col-md-12">
-			<div class="block full table-responsive">
-				<?php
-				if ($get_dokumen == '401') {
-					?>
-					<h1>
-						API Dilarang
-					</h1>
-					<?php
-				} else if ($get_dokumen !== '401') {
-					?>
-					<div class="block-title">
-						<h2><strong>Tabel</strong> Dokumen</h2>
-					</div>
-					<div id="AJAX_dataDokumen">
-						<div class="row">
-							<div class="col-md-1">
-								<i class="fa fa-5x fa-info-circle"></i>
-							</div>
-							<div class="col-md-11">
-								<h2>Keyword belum dipilih</h2><br><small>Tolong pilih keyword diatas...</small>
-							</div>
+				<hr>
+				<div id="AJAX_dataDokumen">
+					<div class="row">
+						<div class="col-md-1">
+							<i class="fa fa-5x fa-info-circle"></i>
+						</div>
+						<div class="col-md-11">
+							<h2>Keyword belum dipilih</h2><br><small>Tolong pilih keyword diatas...</small>
 						</div>
 					</div>
-					<?php
-				}
-				?>
+				</div>
 			</div>
 		</div>
 	</div>

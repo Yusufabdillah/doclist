@@ -41,7 +41,7 @@ class M_Dokumen extends CI_Model {
         } if ($key === "getDataByDepartemen") {
 			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
 			$parsedBody['idDepartemen'] = $_SESSION['idDepartemen'];
-			$Fetch = $this->guzzle->API_Get('F_Dokumen/getByDepartemen', $parsedBody);
+			$Fetch = $this->guzzle->API_Get('F_Dokumen/getByDepartemen', $parsedBody, $json);
 			if ($Fetch == $this->Code_UNAUTHORIZED) {
 				return $this->Code_UNAUTHORIZED;
 			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
@@ -74,7 +74,6 @@ class M_Dokumen extends CI_Model {
     public function getDokumenExpired($key = "getAll", $kolom = null, $value_kolom = null, $value_pk = null, $json = false) {
         if ($key === "getAll") {
             $parsedBody['idUser'] = encode_str($_SESSION['idUser']);
-            // $parsedBody['idUser'] = ;
             $Fetch = $this->guzzle->API_Get('F_Dokumen/getAllExpired', $parsedBody, $json);
             if ($Fetch == $this->Code_UNAUTHORIZED) {
                 return $this->Code_UNAUTHORIZED;
@@ -92,7 +91,7 @@ class M_Dokumen extends CI_Model {
         } if ($key === "getDataByDepartemen") {
             $parsedBody['idUser'] = encode_str($_SESSION['idUser']);
             $parsedBody['idDepartemen'] = $_SESSION['idDepartemen'];
-            $Fetch = $this->guzzle->API_Get('F_Dokumen/getByDepartemenExpired', $parsedBody);
+            $Fetch = $this->guzzle->API_Get('F_Dokumen/getByDepartemenExpired', $parsedBody, $json);
             if ($Fetch == $this->Code_UNAUTHORIZED) {
                 return $this->Code_UNAUTHORIZED;
             } if ($Fetch !== $this->Code_UNAUTHORIZED) {

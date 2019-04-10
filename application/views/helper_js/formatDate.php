@@ -7,10 +7,9 @@
  */
 ?>
 <script type="text/javascript">
-    function formatDatetime(tanggal, zona_waktu = null) {
+    function formatDate(tanggal) {
         var DATA = tanggal.split(" ");
         var SPL_Tanggal = DATA[0].split("-");
-        var SPL_Waktu = DATA[1].split(":");
         var tgl = SPL_Tanggal[2];
         var bln_angka = SPL_Tanggal[1];
         if (bln_angka == '01') {
@@ -40,8 +39,6 @@
         }
         var thn = SPL_Tanggal[0];
         var Tanggal = tgl+" "+bln+" "+thn;
-        var Waktu = SPL_Waktu[0]+":"+SPL_Waktu[1];
-
-        return Tanggal+" "+Waktu+" "+zona_waktu;
+        return Tanggal;
     }
 </script>

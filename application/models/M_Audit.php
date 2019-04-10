@@ -88,7 +88,7 @@ class M_Audit extends CI_Model {
 		} if ($key === "getDataByAudit") {
 			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
 			$parsedBody['idAudit'] = $value_pk;
-			$Fetch = $this->guzzle->API_Get('F_RefAudit/getDataByAudit', $parsedBody);
+			$Fetch = $this->guzzle->API_Get('F_RefAudit/getDataByAudit', $parsedBody, $json);
 			if ($Fetch == $this->Code_UNAUTHORIZED) {
 				return $this->Code_UNAUTHORIZED;
 			}
@@ -251,6 +251,12 @@ class M_Audit extends CI_Model {
         }
     }
 
+	/**
+	 * @param $DATA_POST
+	 * @return array
+	 *
+	 * todo : coba cari ini dipakai atau tidak ?
+	 */
     public function tambahDokumen($DATA_POST) {
 		$data = array(
 			'idAudit' => $DATA_POST['idAudit'],

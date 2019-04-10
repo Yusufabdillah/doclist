@@ -144,5 +144,9 @@ class Template {
         <?php
     }
 
+    public function helperJS($JS) {
+		$this->_CI->load->view('helper_js/'.$JS);
+	}
+
 
 }
