@@ -13,10 +13,8 @@ class F_Dashboard extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('idUser')){
-            redirect('Auth/index');
-        }
-         $this->load->model(array(
+        $this->otorisasi->cek($this->session->idUser, 'frontEnd');
+        $this->load->model(array(
             'M_Dokumen',
             'M_Departemen',
             'M_Instansi'
@@ -29,8 +27,7 @@ class F_Dashboard extends MY_Controller {
      * dengan tabel lainnya , sehingga tidak perlu memakai fungsi dari model lainnya
      */
     public function index() {
-    	$data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
-        $this->template->frontend($this->VIEW_PATH."/index", "Dashboard",$data);
+        $this->template->frontend($this->VIEW_PATH."/index", "Dashboard");
     }
 
     public function sesiAktif() {

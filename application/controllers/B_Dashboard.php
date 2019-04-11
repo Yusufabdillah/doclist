@@ -13,9 +13,7 @@ class B_Dashboard extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('idUser')){
-            redirect('Auth/index');
-        }
+		$this->otorisasi->cek($this->session->idUser, 'backEnd');
     }
 
     protected function load_models(){

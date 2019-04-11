@@ -10,3 +10,4 @@
     <script src="<?= site_url("assets/vendor/backend/assets/demo/default/base/scripts.bundle.js"); ?>" type="text/javascript"></script>
     <script src="<?= site_url("assets/vendor/backend/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js"); ?>" type="text/javascript"></script>
     <script src="<?= site_url("assets/vendor/backend/assets/app/js/dashboard.js"); ?>" type="text/javascript"></script>
+	<script src="<?= site_url("assets/vendor/library/Pace/src/pace.min.js"); ?>"></script>

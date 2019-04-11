@@ -49,33 +49,42 @@
 		</a>
 	</li>
 	<?php
-	foreach ($_getMenu1 as $row1) {
+	if ($_getMenu1 == 401) {
 		?>
 		<li class='sidebar-header'>
-			<span class='sidebar-header-title'><?= $row1->menuLabel ?></span>
+			<span class='sidebar-header-title'><i class="fa fa-lock"></i> Unauthorized</span>
 		</li>
-		<?php
-		foreach ($_getMenu2 as $row2) {
-			if ($row2->menuHeader == $row1->idMenu) {
-				$EXP_Menu = explode('/', $row2->menuLink);
-				?>
-				<li class="<?= strtolower($EXP_Menu[0]) == strtolower($this->router->fetch_class()) ? 'active' : null; ?>">
-					<a href="<?= site_url($row2->menuLink); ?>">
-						<table width="100%">
-							<tr>
-								<td width="16%">
-									<?= $row2->menuIcon; ?>
-								</td>
-								<td width="*" style="line-height: 16px">
-									<span class="sidebar-nav-mini-hide"><?= $row2->menuLabel; ?></span>
-								</td>
-							</tr>
-						</table>
-					</a>
-				</li>
-				<?php
+	<?php
+	} else  {
+		foreach ($_getMenu1 as $row1) {
+			?>
+			<li class='sidebar-header'>
+				<span class='sidebar-header-title'><?= $row1->menuLabel ?></span>
+			</li>
+			<?php
+			foreach ($_getMenu2 as $row2) {
+				if ($row2->menuHeader == $row1->idMenu) {
+					$EXP_Menu = explode('/', $row2->menuLink);
+					?>
+					<li class="<?= strtolower($EXP_Menu[0]) == strtolower($this->router->fetch_class()) ? 'active' : null; ?>">
+						<a href="<?= site_url($row2->menuLink); ?>">
+							<table width="100%">
+								<tr>
+									<td width="16%">
+										<?= $row2->menuIcon; ?>
+									</td>
+									<td width="*" style="line-height: 16px">
+										<span class="sidebar-nav-mini-hide"><?= $row2->menuLabel; ?></span>
+									</td>
+								</tr>
+							</table>
+						</a>
+					</li>
+					<?php
+				}
 			}
 		}
-	} ?>
+	}
+	?>
 
 </ul>

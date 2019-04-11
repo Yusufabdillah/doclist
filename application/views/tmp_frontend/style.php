@@ -12,4 +12,5 @@
 <link rel="stylesheet" href="<?= site_url("assets/vendor/frontend/css/main.css"); ?>">
 <link rel="stylesheet" href="<?= site_url("assets/vendor/frontend/css/themes.css"); ?>">
 <link rel="stylesheet" href="<?= site_url("assets/vendor/library/sweetallert2/dist/sweetalert2.min.css"); ?>">
+<link rel="stylesheet" href="<?= site_url("assets/vendor/library/Pace/theme/minimal.css"); ?>">
 <script src="<?= site_url('assets/vendor/frontend/js/vendor/modernizr.min.js'); ?>"></script>

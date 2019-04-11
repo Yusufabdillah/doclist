@@ -50,7 +50,7 @@ class M_Dokumen extends CI_Model {
 		} if ($key === "getDataPengajuanEdit") {
 			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
 			$parsedBody['idDepartemen'] = $_SESSION['idDepartemen'];
-			$Fetch = $this->guzzle->API_Get('F_Dokumen/getDataPengajuanEdit', $parsedBody);
+			$Fetch = $this->guzzle->API_Get('F_Dokumen/getDataPengajuanEdit', $parsedBody, $json);
 			if ($Fetch == $this->Code_UNAUTHORIZED) {
 				return $this->Code_UNAUTHORIZED;
 			} if ($Fetch !== $this->Code_UNAUTHORIZED) {

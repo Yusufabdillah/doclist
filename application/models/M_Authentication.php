@@ -8,11 +8,9 @@
 
 class M_Authentication extends CI_Model {
 
-    private $TABLE = "tbl_mstuser";
-    private $PK = "idUser";
-
     private $AKTIF = true;
     private $NON_AKTIF = false;
+    private $Code_UNAUTHORIZED = 401;
 
     public function __construct()
     {
@@ -120,4 +118,14 @@ class M_Authentication extends CI_Model {
         $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
         $this->session->set_userdata('host_name', $hostname);
     }
+
+    public function cekOtorisasi($sesiAktif) {
+		$parsedBody['idUser'] = encode_str($sesiAktif);
+		$Fetch = $this->guzzle->API_Get('B_User/cekOtorisasi', $parsedBody, true);
+		if ($Fetch == $this->Code_UNAUTHORIZED) {
+			return $this->Code_UNAUTHORIZED;
+		} if ($Fetch !== $this->Code_UNAUTHORIZED) {
+			return 200;
+		}
+	}
 }

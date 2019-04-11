@@ -16,26 +16,7 @@
                     Departemen
                 </h3>
             </div>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="<?= site_url("B_Dashboard/index"); ?>">
-                        <i style="font-size: 20px" class="fa fa-2x fa-home"></i>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <a href="<?= site_url($this->router->fetch_class()."/".$this->router->fetch_method()) ?>">
-                        <?php
-                        $EXPL = explode('_',$this->router->fetch_class());
-                        echo $EXPL[1];
-                        ?>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <?= $this->router->fetch_method(); ?>
-                </li>
-            </ul>
+			<?php $this->load->view('tmp_backend/breadcrumb'); ?>
         </div>
     </div>
     <!-- END: Subheader -->
@@ -49,62 +30,44 @@
                         </h3>
                     </div>
                 </div>
-                <?php
-                if ($get_departemen !== '401') {
-                    ?>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right"
-                                     data-dropdown-persistent="true" data-dropdown-toggle="click">
-                                    <a href="#" class="m-dropdown__toggle btn m-btn--pill btn-primary dropdown-toggle">
-                                        <i class="la la-search"></i>
-                                    </a>
-                                    <div class="m-dropdown__wrapper">
-                                        <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                        <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">
-                                                <div class="m-dropdown__content">
-                                                    <input autofocus type="text" class="form-control m-input"
-                                                           placeholder="Pencarian..." id="generalSearch">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="<?= site_url('b_departemen/form'); ?>" class="btn m-btn--pill btn-accent"
-                                   data-container="body"
-                                   data-toggle="m-popover"
-                                   data-placement="left"
-                                   data-skin="dark"
-                                   data-html="true"
-                                   data-content="<i class='la la-info-circle'></i> Tambah Departemen"
-                                >
-                                    <i class="la la-plus"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <?php
-                }
-                ?>
+				<div class="m-portlet__head-tools">
+					<ul class="m-portlet__nav">
+						<li class="m-portlet__nav-item">
+							<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right"
+								 data-dropdown-persistent="true" data-dropdown-toggle="click">
+								<a href="#" class="m-dropdown__toggle btn m-btn--pill btn-primary dropdown-toggle">
+									<i class="la la-search"></i>
+								</a>
+								<div class="m-dropdown__wrapper">
+									<span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
+									<div class="m-dropdown__inner">
+										<div class="m-dropdown__body">
+											<div class="m-dropdown__content">
+												<input autofocus type="text" class="form-control m-input"
+													   placeholder="Pencarian..." id="generalSearch">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="m-portlet__nav-item">
+							<a href="<?= site_url('b_departemen/form'); ?>" class="btn m-btn--pill btn-accent"
+							   data-container="body"
+							   data-toggle="m-popover"
+							   data-placement="left"
+							   data-skin="dark"
+							   data-html="true"
+							   data-content="<i class='la la-info-circle'></i> Tambah Departemen"
+							>
+								<i class="la la-plus"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
             </div>
             <div class="m-portlet__body">
-                <?php
-                if ($get_departemen == 401) {
-                    ?>
-                    <h2 class="text-center">
-                        <i style="font-size: 25px" class="fa fa-2x fa-lock"></i> Kunci API tidak diberikan izin...
-                    </h2>
-                    <?php
-                } else if ($get_departemen !== 401) {
-                    ?>
-                    <div class="m_datatable" id="server_data"></div>
-                    <?php
-                }
-                ?>
+				<div class="m_datatable" id="server_data"></div>
             </div>
         </div>
     </div>

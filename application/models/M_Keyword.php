@@ -60,12 +60,12 @@ class M_Keyword extends CI_Model {
 		} if ($key === "getDokumenByKeyword") {
 			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
 			$parsedBody['whereRaw'] = $value_pk;
-			$Fetch = $this->guzzle->API_Get('B_Keyword/getDokumenByKeyword', $parsedBody);
+			$Fetch = $this->guzzle->API_Get('B_Keyword/getDokumenByKeyword', $parsedBody, $json);
 			if ($Fetch == $this->Code_UNAUTHORIZED) {
 				return $this->Code_UNAUTHORIZED;
 			}
 			if ($Fetch !== $this->Code_UNAUTHORIZED) {
-				return $Fetch->data;
+				return $Fetch;
 			}
 		} else {
             self::getKeyword("getAll");

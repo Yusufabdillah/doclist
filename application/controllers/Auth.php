@@ -29,5 +29,13 @@ class Auth extends MY_Controller {
         $this->M_Authentication->logOut($this->session->idLog);
     }
 
+    public function cekAPI($Bagian = 'frontEnd', $kode) {
+    	if ($Bagian == 'frontEnd') {
+			$this->template->frontend("authentication/".$kode, "Unauthorized");
+		} else if ($Bagian == 'backEnd') {
+			$this->template->backend("authentication/".$kode, "Unauthorized");
+		}
+	}
+
 
 }

@@ -13,10 +13,7 @@ class F_Keyword extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if(!$this->session->userdata('idUser')){
-			redirect('Auth/index');
-		}
-
+		$this->otorisasi->cek($this->session->idUser, 'frontEnd');
 		$this->load->model(array(
 			'M_Dokumen',
 			'M_Keyword'
@@ -29,8 +26,6 @@ class F_Keyword extends MY_Controller {
 	 * dengan tabel lainnya , sehingga tidak perlu memakai fungsi dari model lainnya
 	 */
 	public function index() {
-		$data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
-		$data['get_dokumen'] = null;
 		$data['get_keyword'] = $this->M_Keyword->getKeyword('getAll', null, null, null, false);
 		$this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
 	}
@@ -41,24 +36,21 @@ class F_Keyword extends MY_Controller {
 	}
 
 	public function AJAX() {
-		$Fungsi = $this->input->post('fungsi');
-		if ($Fungsi == 'toKeyword') {
-			if ($_POST['AR_idKeyword'] == 'NULL') {
-				$data = array(
-					'get_dokumen' => null
-				);
-				$this->load->view('frontend/keyword/ajax_view/dokumen', $data);
-			} else if ($_POST['AR_idKeyword'] !== 'NULL') {
-				foreach ($_POST['AR_idKeyword'] AS $KEY => $data) {
-					$AR_idKeyword[] = 'idKeyword = '.$data;
-				}
-				$whereRaw = implode(' AND ', $AR_idKeyword);
-				$data = array(
-					'get_dokumen' => $this->M_Keyword->getKeyword('getDokumenByKeyword', null, null, $whereRaw)
-				);
-				$this->load->view('frontend/keyword/ajax_view/dokumen', $data);
+		if ($_POST['AR_idKeyword'] == 'NULL') {
+			print null;
+		} else if ($_POST['AR_idKeyword'] !== 'NULL') {
+			foreach ($_POST['AR_idKeyword'] AS $KEY => $data) {
+				$AR_idKeyword[] = 'idKeyword = '.$data;
 			}
+			$whereRaw = implode(' AND ', $AR_idKeyword);
+			print $this->M_Keyword->getKeyword('getDokumenByKeyword', null, null, $whereRaw, true);
 		}
 	}
 
+	public function AJAXRedirect() {
+		$fungsi = $this->input->post('fungsi');
+		if ($fungsi == 'toDetail') {
+			print encode_str($this->input->post('idDokumen'));
+		}
+	}
 }

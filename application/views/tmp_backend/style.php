@@ -14,4 +14,5 @@
     <link href="<?= site_url("assets/vendor/backend/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css"); ?>" rel="stylesheet" type="text/css" />
     <link href="<?= site_url("assets/vendor/backend/assets/vendors/base/vendors.bundle.css"); ?>" rel="stylesheet" type="text/css" />
     <link href="<?= site_url("assets/vendor/backend/assets/demo/default/base/style.bundle.css"); ?>" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="<?= site_url("assets/vendor/library/Pace/theme/minimal.css"); ?>">
     <link rel="shortcut icon" href="<?= site_url("assets/img/system/logo.png"); ?>" />

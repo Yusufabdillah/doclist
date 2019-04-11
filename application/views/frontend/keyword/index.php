@@ -50,20 +50,10 @@
 					</div>
 				</form>
 				<hr>
-				<div id="AJAX_dataDokumen">
-					<div class="row">
-						<div class="col-md-1">
-							<i class="fa fa-5x fa-info-circle"></i>
-						</div>
-						<div class="col-md-11">
-							<h2>Keyword belum dipilih</h2><br><small>Tolong pilih keyword diatas...</small>
-						</div>
-					</div>
-				</div>
+				<table class="table table-striped table-bordered" style="width:100%"></table>
 			</div>
 		</div>
 	</div>
 <?php
-$this->load->view('frontend/keyword/JSDatatable');
 $this->load->view('frontend/keyword/JSSelect2');
-$this->load->view('frontend/keyword/AJAX');
+$this->load->view('frontend/keyword/JS_DT_Index');

@@ -13,10 +13,7 @@ class F_Mutasi extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if(!$this->session->userdata('idUser')){
-			redirect('Auth/index');
-		}
-
+		$this->otorisasi->cek($this->session->idUser, 'frontEnd');
 		$this->load->model(array(
 			'M_Dokumen',
 			'M_Mutasi'

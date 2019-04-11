@@ -13,10 +13,7 @@ class F_MonitoringDokumen extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('idUser')){
-            redirect('Auth/index');
-        }
-
+		$this->otorisasi->cek($this->session->idUser, 'frontEnd');
         $this->load->model(array(
             'M_Dokumen'
         ));
@@ -28,8 +25,7 @@ class F_MonitoringDokumen extends MY_Controller {
      * dengan tabel lainnya , sehingga tidak perlu memakai fungsi dari model lainnya
      */
     public function index() {
-        $data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
-        $this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
+        $this->template->frontend($this->VIEW_PATH."/index", "Master Document");
     }
 
     public function detail($idDokumen) {

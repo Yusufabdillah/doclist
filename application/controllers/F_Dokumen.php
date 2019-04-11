@@ -13,10 +13,7 @@ class F_Dokumen extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('idUser')){
-            redirect('Auth/index');
-        }
-
+		$this->otorisasi->cek($this->session->idUser, 'frontEnd');
         $this->load->model(array(
             'M_Dokumen',
             'M_Departemen',
@@ -33,7 +30,6 @@ class F_Dokumen extends MY_Controller {
      * dengan tabel lainnya , sehingga tidak perlu memakai fungsi dari model lainnya
      */
     public function index() {
-        $data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
 		$data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
         $this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
     }
@@ -66,7 +62,7 @@ class F_Dokumen extends MY_Controller {
         		'get_dokumen' => $this->M_Dokumen->getDokumen('getDataByPK', null, null, decode_str($idDokumen)),
 				'get_departemen' => $this->M_Departemen->getDepartemen("getAll", null, null, null, false),
 				'get_instansi' => $this->M_Instansi->getInstansi("getAll", null, null, null, false),
-				'get_audit' => $this->M_Audit->getAudit('getAll', null, null, null, false),
+				'get_audit' => $this->M_Audit->getAudit('getAll', null, null, null, false)->data,
 				'get_keyword' => $this->M_Keyword->getKeyword('getAll', null, null, null, false),
 				'get_ref_audit' => isset($dataRefAudit) ? $dataRefAudit : null,
 				'get_ref_keyword' => isset($dataRefKeyword) ? $dataRefKeyword : null,

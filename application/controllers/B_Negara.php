@@ -13,9 +13,7 @@ class B_Negara extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->userdata('idUser')){
-            redirect('Auth/index');
-        }
+		$this->otorisasi->cek($this->session->idUser, 'backEnd');
         $this->load->model('M_Negara');
     }
 

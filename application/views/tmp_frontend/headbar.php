@@ -16,7 +16,7 @@
 		<a href="<?= site_url($this->router->fetch_class()."/index"); ?>" style="font-size: 20px">
 			<?php
 			$EXPL = explode('_', $this->router->fetch_class());
-			echo $EXPL[1];
+			$Class = empty($EXPL[1]) ? $this->router->fetch_class() : $EXPL[1];
 			?> &nbsp;/&nbsp; <?= $this->router->fetch_method(); ?>
 		</a>
 	</li>

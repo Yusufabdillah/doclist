@@ -16,26 +16,7 @@
                     Activity Log
                 </h3>
             </div>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="<?= site_url("B_Dashboard/index"); ?>">
-                        <i style="font-size: 20px" class="fa fa-2x fa-home"></i>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <a href="<?= site_url($this->router->fetch_class()."/".$this->router->fetch_method()) ?>">
-                        <?php
-                        $EXPL = explode('_',$this->router->fetch_class());
-                        echo $EXPL[1];
-                        ?>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <?= $this->router->fetch_method(); ?>
-                </li>
-            </ul>
+			<?php $this->load->view('tmp_backend/breadcrumb'); ?>
         </div>
     </div>
     <!-- END: Subheader -->
@@ -73,19 +54,7 @@
 
             </div>
             <div class="m-portlet__body">
-                <?php
-                if ($get_log == 401) {
-                    ?>
-                    <h2 class="text-center">
-                        <i style="font-size: 25px" class="fa fa-2x fa-lock"></i> Kunci API tidak diberikan izin...
-                    </h2>
-                    <?php
-                } else if ($get_log !== 401) {
-                    ?>
-                    <div class="m_datatable" id="server_data"></div>
-                    <?php
-                }
-                ?>
+				<div class="m_datatable" id="server_data"></div>
             </div>
         </div>
     </div>

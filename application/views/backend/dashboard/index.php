@@ -16,26 +16,7 @@
                     Dashboard
                 </h3>
             </div>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="<?= site_url("B_Dashboard/index"); ?>">
-                        <i style="font-size: 20px" class="fa fa-2x fa-home"></i>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <a href="<?= site_url($this->router->fetch_class()."/index") ?>">
-                        <?php
-                        $EXPL = explode('_',$this->router->fetch_class());
-                        echo $EXPL[1];
-                        ?>
-                    </a>
-                </li>
-                <li>&nbsp;>&nbsp;</li>
-                <li>
-                    <?= $this->router->fetch_method(); ?>
-                </li>
-            </ul>
+			<?php $this->load->view('tmp_backend/breadcrumb'); ?>
         </div>
     </div>
     <!-- END: Subheader -->
@@ -53,9 +34,6 @@
             <div class="m-portlet__body">
                 <pre>
                     <?= print_r($_SESSION); ?>
-                </pre>
-                <pre>
-                    <?= print_r(site_url()) ?>
                 </pre>
             </div>
         </div>

@@ -13,10 +13,7 @@ class F_PengajuanEdit extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if(!$this->session->userdata('idUser')){
-			redirect('Auth/index');
-		}
-
+		$this->otorisasi->cek($this->session->idUser, 'frontEnd');
 		$this->load->model(array(
 			'M_Dokumen',
 			'M_Departemen',
@@ -31,7 +28,6 @@ class F_PengajuanEdit extends MY_Controller {
 	 */
 	public function index() {
 		$data['http_kode'] = $this->M_Dokumen->getDokumen('cekKode');
-		$data['get_dokumen'] = $this->M_Dokumen->getDokumen('getDataPengajuanEdit');
 		$this->template->frontend($this->VIEW_PATH."/index", "Master Document", $data);
 	}
 
@@ -52,5 +48,17 @@ class F_PengajuanEdit extends MY_Controller {
 		redirect($this->router->fetch_class().'/index');
 	}
 
+	public function AJAX($fetch = null) {
+		if (isset($fetch)) {
+			if ($fetch == 'getDokumen-getDataPengajuanEdit') {
+				print $this->M_Dokumen->getDokumen('getDataPengajuanEdit', null, null, null, true);
+			}
+		} else if (!isset($fetch)) {
+			$Fungsi = $this->input->post('fungsi');
+			if ($Fungsi == 'toDetail') {
+				print encode_str($this->input->post('idDokumen'));
+			}
+		}
+	}
 
 }
