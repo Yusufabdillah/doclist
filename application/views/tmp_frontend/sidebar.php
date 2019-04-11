@@ -6,7 +6,7 @@
  * Time: 18:58
  */
 ?>
-<a href="index.html" class="sidebar-brand">
+<a href="<?= site_url('F_Dashboard/index'); ?>" class="sidebar-brand">
 	<img style="alignment: center" alt="permit" height="40px" src="<?= base_url() . "assets/img/system/logo.png"; ?>"/>
 </a>
 <ul class="sidebar-nav">
