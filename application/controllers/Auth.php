@@ -11,6 +11,9 @@ class Auth extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
+        if (isset($this->session->idUser)) {
+        	redirect(site_url('F_Dashboard/index'));
+		}
     }
 
     protected function load_models(){

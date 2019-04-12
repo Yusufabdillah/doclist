@@ -46,7 +46,7 @@ class F_Dokumen extends MY_Controller {
         if (empty($idDokumen)) {
             $data['get_departemen'] = $this->M_Departemen->getDepartemen("getAll", null, null, null, false);
             $data['get_instansi'] = $this->M_Instansi->getInstansi("getAll", null, null, null, false);
-            $data['get_audit'] = $this->M_Audit->getAudit('getAll', null, null, null, false);
+            $data['get_audit'] = $this->M_Audit->getAudit('getAll', null, null, null, false)->data;
             $data['get_keyword'] = $this->M_Keyword->getKeyword('getAll', null, null, null, false);
             $this->template->frontend($this->VIEW_PATH."/form", "Tambah Dokumen", $data);
         } else if (!empty($idDokumen)) {

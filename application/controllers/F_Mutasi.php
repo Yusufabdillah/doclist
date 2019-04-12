@@ -26,12 +26,7 @@ class F_Mutasi extends MY_Controller {
 	 * dengan tabel lainnya , sehingga tidak perlu memakai fungsi dari model lainnya
 	 */
 	public function index() {
-		$data['get_verifikasi_false'] = $this->M_Mutasi->getMutasi('getListVerifikasiFalse');
-		$data['get_verifikasi_true'] = $this->M_Mutasi->getMutasi('getListVerifikasiTrue');
-		$data['get_created_false'] = $this->M_Mutasi->getMutasi('getListCreatedByFalse');
-		$data['get_created_true'] = $this->M_Mutasi->getMutasi('getListCreatedByTrue');
-		$data['get_tolak'] = $this->M_Mutasi->getMutasi('getListTolakMutasi');
-		$this->template->frontend($this->VIEW_PATH."/index", "Mutasi", $data);
+		$this->template->frontend($this->VIEW_PATH."/index", "Mutasi");
 	}
 
 	public function mutasiDokumen() {
@@ -51,6 +46,42 @@ class F_Mutasi extends MY_Controller {
 	public function detail($idDokumen) {
 		$data['get_dokumen'] = $this->M_Dokumen->getDokumen('getDataByPK', null, null, decode_str($idDokumen));
 		$this->template->frontend($this->VIEW_PATH."/detail", "Detail Dokumen", $data);
+	}
+
+	public function AJAXRouter() {
+		$fungsi = $this->input->post('fungsi');
+		if ($fungsi == 'toVerifikasiTrue') {
+			$this->load->view('frontend/mutasi/ajax_view/verifikasi_true/index');
+		} if ($fungsi == 'toVerifikasiFalse') {
+			$this->load->view('frontend/mutasi/ajax_view/verifikasi_false/index');
+		} if ($fungsi == 'toTermutasiTrue') {
+			$this->load->view('frontend/mutasi/ajax_view/termutasi_true/index');
+		} if ($fungsi == 'toTermutasiFalse') {
+			$this->load->view('frontend/mutasi/ajax_view/termutasi_false/index');
+		} else if ($fungsi == 'toTermutasiTolak') {
+			$this->load->view('frontend/mutasi/ajax_view/termutasi_tolak/index');
+		}
+	}
+
+	public function AJAXData($bagian) {
+		if ($bagian == 'getVerifikasiTrue') {
+			print $this->M_Mutasi->getMutasi('getListVerifikasiTrue', true);
+		} if ($bagian == 'getVerifikasiFalse') {
+			print $this->M_Mutasi->getMutasi('getListVerifikasiFalse', true);
+		} if ($bagian == 'getTermutasiTrue') {
+			print $this->M_Mutasi->getMutasi('getListCreatedByTrue', true);
+		} if ($bagian == 'getTermutasiFalse') {
+			print $this->M_Mutasi->getMutasi('getListCreatedByFalse', true);
+		} else if ($bagian == 'getTermutasiTolak') {
+			print $this->M_Mutasi->getMutasi('getListTolakMutasi', true);
+		}
+	}
+
+	public function AJAXEncode() {
+		$fungsi = $this->input->post('fungsi');
+		if ($fungsi == 'toDetail') {
+			print encode_str($this->input->post('idDokumen'));
+		}
 	}
 
 }

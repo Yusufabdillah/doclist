@@ -17,6 +17,7 @@
 			<?php
 			$EXPL = explode('_', $this->router->fetch_class());
 			$Class = empty($EXPL[1]) ? $this->router->fetch_class() : $EXPL[1];
+			echo $Class;
 			?> &nbsp;/&nbsp; <?= $this->router->fetch_method(); ?>
 		</a>
 	</li>
