@@ -65,8 +65,16 @@ class M_Dokumen extends CI_Model {
 			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
 				return $Fetch;
 			}
-		}
-        else {
+		} if ($key === "cekNomorDokumen") {
+			$parsedBody['idUser'] = encode_str($_SESSION['idUser']);
+			$parsedBody['nomorDokumen'] = $value_pk;
+			$Fetch = $this->guzzle->API_Get('F_Dokumen/cekNomorDokumen', $parsedBody);
+			if ($Fetch == $this->Code_UNAUTHORIZED) {
+				return $this->Code_UNAUTHORIZED;
+			} if ($Fetch !== $this->Code_UNAUTHORIZED) {
+				return $Fetch;
+			}
+		} else {
             self::getDokumen("getAll");
         }
     }

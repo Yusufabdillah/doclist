@@ -258,12 +258,14 @@
 											$nomorDokumen = array(
 												'label' => 'Nomor Dokumen',
 												'name' => 'nomorDokumen',
+												'id' => 'AJAX_FO_nomorDokumen',
 												'placeholder' => 'Input nomor dokumen...',
 												'help' => 'Mohon input nomor dokumen'
 											);
 											?>
 											<label class="control-label"><?= $nomorDokumen['label']; ?></label>
 											<input type="text" name="<?= $nomorDokumen['name']; ?>"
+												   id="<?= $nomorDokumen['id']; ?>"
 												   class="form-control input-sm"
 												   placeholder="<?= $nomorDokumen['placeholder']; ?>"
 												   value="<?= isset($get_dokumen) ? $get_dokumen->nomorDokumen : null; ?>"/>

@@ -6,7 +6,43 @@
  * Time: 11:17
  */
 ?>
+<style>
+	.pengaturanSwal{
+		font-size: 15px;
+	}
+</style>
 <script type="text/javascript">
+	$('#AJAX_FO_nomorDokumen').focusout(function () {
+		var data = $("#AJAX_FO_nomorDokumen").val();
+		$.ajax({
+			type: "POST",
+			url: "<?= site_url($this->router->fetch_class().'/AJAX')?>",
+			data: {
+				'fungsi' : 'focusOutNomorDokumen',
+				'nomorDokumen' : data
+			},
+			success: function(status){
+				if (status == 'ada_yang_sama') {
+					Swal.fire({
+						title: 'Nomor Dokumen Sama !',
+						allowOutsideClick: false,
+						text: "Nomor dokumen yang anda masukkan sudah digunakan dokumen lain.",
+						type: 'warning',
+						customClass: 'pengaturanSwal',
+						confirmButtonColor: '#7db831',
+						confirmButtonText: 'Kembali menginput'
+					}).then((result) => {
+						if (result.value) {
+							$('#AJAX_FO_nomorDokumen').focus();
+						}
+					});
+				} else {
+					return null;
+				}
+			}
+		});
+	});
+
     $('#AJAX_expired_unlimitedDokumen').change(function () {
         if(!this.checked) {
             //var data = $("#AJAX_exp_selamanyaDokumen").val();

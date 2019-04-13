@@ -133,12 +133,16 @@ class F_Dokumen extends MY_Controller {
 				$data['get_user'] = $this->M_User->getUser('getDataByDepartemen', null, null, $_POST['idDepartemen']);
 				$this->load->view('frontend/dokumen/ajax_view/user', $data);
 			}
+
 			/**
 			 * Untuk Kepala Instansi
 			 */
 			if ($Fungsi == 'toKepalaInstansi') {
 				$data['get_instansi'] = $this->M_Instansi->getInstansi('getDataByPK', null, null, $_POST['idInstansi']);
 				$this->load->view('frontend/dokumen/ajax_view/kepala_instansi',$data);
+			}
+			if ($Fungsi == 'focusOutNomorDokumen') {
+				print $this->M_Dokumen->getDokumen('cekNomorDokumen', null, null, $_POST['nomorDokumen']);
 			}
 		}
     }
