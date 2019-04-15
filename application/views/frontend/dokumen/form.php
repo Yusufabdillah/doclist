@@ -37,7 +37,7 @@
 							<?php
 							if (isset($get_dokumen)) {
 								?>
-								<input type="hidden" name="idDokumen" value="<?= $get_dokumen->idDokumen; ?>">
+								<input type="hidden" id="AJAX_FO_idDokumen" name="idDokumen" value="<?= $get_dokumen->idDokumen; ?>">
 								<input type="hidden" name="createdBy" value="<?= $get_dokumen->createdBy; ?>">
 								<input type="hidden" name="createdDate" value="<?= $get_dokumen->createdDate; ?>">
 								<input type="hidden" name="idDepartemen" value="<?= $get_dokumen->idDepartemen; ?>">

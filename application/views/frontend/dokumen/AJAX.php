@@ -13,16 +13,20 @@
 </style>
 <script type="text/javascript">
 	$('#AJAX_FO_nomorDokumen').focusout(function () {
-		var data = $("#AJAX_FO_nomorDokumen").val();
+		var idDokumen = $("#AJAX_FO_idDokumen").val();
+		var nomorDokumen = $("#AJAX_FO_nomorDokumen").val();
 		$.ajax({
 			type: "POST",
 			url: "<?= site_url($this->router->fetch_class().'/AJAX')?>",
 			data: {
 				'fungsi' : 'focusOutNomorDokumen',
-				'nomorDokumen' : data
+				'idDokumen' : idDokumen,
+				'nomorDokumen' : nomorDokumen
 			},
 			success: function(status){
-				if (status == 'ada_yang_sama') {
+				if (status == "idDokumen_Sama-nomorDokumen_Sama") {
+					return null;
+				} if (status == "idDokumen_Tidak_Sama-nomorDokumen_Sama") {
 					Swal.fire({
 						title: 'Nomor Dokumen Sama !',
 						allowOutsideClick: false,
@@ -36,6 +40,8 @@
 							$('#AJAX_FO_nomorDokumen').focus();
 						}
 					});
+				} else if (status == "OK") {
+					return null;
 				} else {
 					return null;
 				}

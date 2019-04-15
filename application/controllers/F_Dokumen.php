@@ -142,7 +142,15 @@ class F_Dokumen extends MY_Controller {
 				$this->load->view('frontend/dokumen/ajax_view/kepala_instansi',$data);
 			}
 			if ($Fungsi == 'focusOutNomorDokumen') {
-				print $this->M_Dokumen->getDokumen('cekNomorDokumen', null, null, $_POST['nomorDokumen']);
+				if (isset($_POST['idDokumen'])) {
+					$dataCek = array(
+						'idDokumen' => $_POST['idDokumen'],
+						'nomorDokumen' => $_POST['nomorDokumen']
+					);
+					print $this->M_Dokumen->getDokumen('cekNomorDokumen', null, null, $dataCek)->status;
+				} else if (!isset($_POST['idDokumen'])) {
+					print $this->M_Dokumen->getDokumen('cekNomorDokumen', null, null, $_POST['nomorDokumen'])->status;
+				}
 			}
 		}
     }
